@@ -5,18 +5,25 @@
 
 int	main()
 {
-int fd = open("text", O_RDONLY);
-char* str;
+int fd = open("e_text", O_RDONLY);
+// char* str;
 // char fakep;
-size_t red_num;
+// size_t red_num;
+char str[10];
+int i = 5;
 
-str = malloc(sizeof(char)*128);
+gets(str);
+// str = malloc(sizeof(char)*128);
 // str = calloc(sizeof(char),128);
-red_num = read(fd ,str , 100);
-printf("%zu\n", red_num);
-printf("%s\n", str);
+// red_num = read(fd ,str , 100);
+i++;
+str[0] -= '0';
+i = i / str[0];
+printf("%d\n", i);
+// printf("%zu\n", red_num);
+// printf("%s\n", str);
 // str = &fakep;
-free(str);
-close(fd);
+// free(str);
+// close(fd);
 return 0;
 }
