@@ -3,23 +3,29 @@
 #include <unistd.h>
 #include <stdio.h>
 
+int	r(int fd, char* str)
+{
+	static int i;
+
+	printf("this is %d times\n", i);
+	i++;
+	return (read(fd ,str , 100));
+}
+
 int	main()
 {
 int fd = open("e_text", O_RDONLY);
-// char* str;
+char* str;
 // char fakep;
-// size_t red_num;
-char str[10];
-int i = 5;
+size_t red_num;
 
-gets(str);
-// str = malloc(sizeof(char)*128);
+str = malloc(sizeof(char)*128);
 // str = calloc(sizeof(char),128);
-// red_num = read(fd ,str , 100);
-i++;
-str[0] -= '0';
-i = i / str[0];
-printf("%d\n", i);
+while (i < 3)
+{
+	r(fd, str);
+	printf("%s \n", str);
+}
 // printf("%zu\n", red_num);
 // printf("%s\n", str);
 // str = &fakep;
