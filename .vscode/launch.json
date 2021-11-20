@@ -1,0 +1,20 @@
+{
+    // IntelliSense を使用して利用可能な属性を学べます。
+    // 既存の属性の説明をホバーして表示します。
+	// 詳細情報は次を確認してください: https://go.microsoft.com/fwlink/?linkid=830387
+	// launch.json はデバッガー（lldb）を実行するための設定ファイル
+	// tasks.json はコンパイル（gcc）を実行するための設定ファイル
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "c_debug",
+            "type": "lldb",
+            "request": "launch",
+			"program": "${fileDirname}/main",
+			//             "program": "${fileDirname}/${fileBasenameNoExtension}"
+            "args": [],
+            "cwd": "${fileDirname}",
+            "preLaunchTask": "c_build"
+        }
+    ]
+}
