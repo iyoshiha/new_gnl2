@@ -12,14 +12,18 @@ int	r(int fd, char* str, int i)
 
 int	main()
 {
+	/*
 int fd = open("text", O_RDONLY);
 char* str;
 int i = 0;
 size_t red_num;
+*/
+static char * sstr;
 // char fakep;
 
-str = malloc(sizeof(char)*128);
+sstr = malloc(sizeof(char)*128);
 // str = calloc(sizeof(char),128);
+/* for read loop ;
 while (i < 3)
 {
 	red_num = r(fd, str, i);
@@ -29,10 +33,12 @@ while (i < 3)
 	puts("#############");
 	printf("\n%zu\n", red_num);
 }
+ end for read loop*/
+
 // printf("%zu\n", red_num);
 // printf("%s\n", str);
 // str = &fakep;
 // free(str);
-close(fd);
+// close(fd);
 return 0;
 }
