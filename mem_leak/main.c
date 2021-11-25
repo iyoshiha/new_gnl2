@@ -2,7 +2,6 @@
 #include <stdlib.h>
 #include <unistd.h>
 #include <stdio.h>
-#include "../../ft_printf/libft/libft.h"
 
 int	r(int fd, char* str, int i)
 {
@@ -19,9 +18,16 @@ int i = 0;
 size_t red_num;
 */
 static char * sstr;
+int i;
 // char fakep;
 
 sstr = malloc(sizeof(char)*128);
+sstr[0] = 1;
+sstr[1] = '\0';
+free(sstr+1);
+sstr = "jjj";
+// i = r(0, sstr, 111);
+// printf("%d\n", i);
 // str = calloc(sizeof(char),128);
 /* for read loop ;
 while (i < 3)
@@ -36,9 +42,8 @@ while (i < 3)
  end for read loop*/
 
 // printf("%zu\n", red_num);
-// printf("%s\n", str);
+printf("%s\n", sstr);
 // str = &fakep;
-// free(str);
 // close(fd);
 return 0;
 }
