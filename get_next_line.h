@@ -6,7 +6,12 @@
 /*   By: iyoshiha <iyoshiha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/20 17:46:07 by iyoshiha          #+#    #+#             */
-/*   Updated: 2021/11/20 17:49:45 by iyoshiha         ###   ########.fr       */
+/*   Updated: 2021/12/01 18:24:38 by iyoshiha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+
+#define BUF
+#ifdef BUF
+#define BUFFER_SIZE 5
+#endif
