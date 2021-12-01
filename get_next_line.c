@@ -6,7 +6,7 @@
 /*   By: iyoshiha <iyoshiha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/20 17:46:32 by iyoshiha          #+#    #+#             */
-/*   Updated: 2021/12/02 02:51:57 by iyoshiha         ###   ########.fr       */
+/*   Updated: 2021/12/02 02:59:47 by iyoshiha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,8 @@ char	*get_next_line(int fd)
 	if (txt.len_read < 0 || txt.len_read && save == NULL) // if error  // if EOF && save == NULL
 		return (NULL);
 	if (txt.len_read) // required info is if txt was read or not here. save doesnt matter coz above conditional expression exclude read val
-	{
+	{ // len is only positive(successfully read) or 0 (all txt was read)
+		buf[BUFFER_SIZE + 1] == '\0';
 		save_buf();
 		str
 	}
