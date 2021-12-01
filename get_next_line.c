@@ -6,7 +6,7 @@
 /*   By: iyoshiha <iyoshiha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/20 17:46:32 by iyoshiha          #+#    #+#             */
-/*   Updated: 2021/12/02 03:30:07 by iyoshiha         ###   ########.fr       */
+/*   Updated: 2021/12/02 03:31:35 by iyoshiha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ char	*get_next_line(int fd)
 		if (txt.len_read == END_OF_FILE)
 			jump if search_break() ture
 			end_make(line);
-			if search was flase
+			if search was flase // same excution: code 1
 			{
 				make(line)
 			}
@@ -52,7 +52,7 @@ char	*get_next_line(int fd)
 			txt.buf[BUFFER_SIZE + 1] == '\0';
 			save_buf(txt);
 		}
-		if (search_break() is TRUE)
+		if (search_break() is TRUE)// same excution: code 1
 			break;
 	}
 	make(line);
