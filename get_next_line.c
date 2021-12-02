@@ -6,7 +6,7 @@
 /*   By: iyoshiha <iyoshiha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/20 17:46:32 by iyoshiha          #+#    #+#             */
-/*   Updated: 2021/12/03 02:34:22 by iyoshiha         ###   ########.fr       */
+/*   Updated: 2021/12/03 02:34:43 by iyoshiha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,7 @@ int find_break_line(char *save);
 	}
 	return (GNL_NOT_FOUND);
 }
+
 void save_buf(char *save, t_txt *txt);
 void move_save_to_line(char *line, char *save, int flag);
 
