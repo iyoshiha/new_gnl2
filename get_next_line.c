@@ -6,7 +6,7 @@
 /*   By: iyoshiha <iyoshiha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/20 17:46:32 by iyoshiha          #+#    #+#             */
-/*   Updated: 2021/12/03 00:36:50 by iyoshiha         ###   ########.fr       */
+/*   Updated: 2021/12/03 00:38:02 by iyoshiha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,8 @@ save_buf(t_txt txt)
 	return;
 }
 
-int	find_break_line();
+int		find_break_line();
+void	save_buf();
 
 
 char	*get_next_line(int fd)
@@ -41,7 +42,7 @@ char	*get_next_line(int fd)
 	if (find_break_line(save) == GNL_NOT_FOUND_BREAK)
 	{
 		while (REACH_EOF_OR_FOUND_BREAK)
-		{ /// loooop
+		{
 			txt.len_read = read(fd, txt.buf, BUFFER_SIZE);
 			if (txt.len_read < 0 || txt.len_read && save == NULL)
 				return (NULL);
@@ -51,7 +52,7 @@ char	*get_next_line(int fd)
 			save_buf(): // when reach here without break means read_num is positive!
 			if (find_break_line() == GNL_FOUND_BREAK)
 				break;
-		} //// loooooooop end
+		}
 		if (txt.len_read == END_OF_FILE)
 			if (find_break_line() == GNL_NOT_FOUND_BREAK)
 				copy_save_to_line(, GNL_ALL);
