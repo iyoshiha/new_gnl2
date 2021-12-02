@@ -6,7 +6,7 @@
 /*   By: iyoshiha <iyoshiha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/20 17:46:32 by iyoshiha          #+#    #+#             */
-/*   Updated: 2021/12/03 02:34:43 by iyoshiha         ###   ########.fr       */
+/*   Updated: 2021/12/03 03:26:14 by iyoshiha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,33 +20,51 @@ typedef struct s_txt
 {
 	char	buf[BUFFER_SIZE + 1];
 	int		flag;
+	int		index_of_breakline;
 	char	*line;
 	ssize_t len_read;
 } t_txt;
 
-save_buf(t_txt txt)
-{
-
-	return;
-}
-
-int find_break_line(char *save);
+int find_break_line(char *save, t_txt *txt);
 {
 	int	i;
 
 	i = 0;
-	if (save == NULL) // why this save is not recognized???
+	if (save == NULL) // why this save is not recognized??? its nomal. like int i;
 		return (GNL_NOT_FOUND);
 	while (save[i] != '\0')
 	{
 		if (save[i] == '\n')
+		{
+			t_txt->index_of_breakline = i;
 			return (GNL_FOUND);
+		i++;
 	}
 	return (GNL_NOT_FOUND);
 }
 
-void save_buf(char *save, t_txt *txt);
-void move_save_to_line(char *line, char *save, int flag);
+void save_buf(char *save, t_txt *txt)
+{
+	char	*for_free;
+	if (save == NULL)
+	{
+		// dup()
+		save = (char *)malloc(buf_len);
+		if (save == NULL)
+			return (NULL);
+		strcpy(save, buf);
+		return ();
+		// this excution above is dup()
+	}
+	for_free = save;
+	save+buf; // join()
+	free(for_free);
+}
+
+void move_save_to_line(char *line, char *save, int flag)
+{
+
+}
 
 char *get_next_line(int fd)
 {
