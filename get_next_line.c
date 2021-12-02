@@ -6,7 +6,7 @@
 /*   By: iyoshiha <iyoshiha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/20 17:46:32 by iyoshiha          #+#    #+#             */
-/*   Updated: 2021/12/03 03:26:14 by iyoshiha         ###   ########.fr       */
+/*   Updated: 2021/12/03 03:41:08 by iyoshiha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,32 @@ void save_buf(char *save, t_txt *txt)
 
 void move_save_to_line(char *line, char *save, int flag)
 {
+	int i;
+	char	*for_free;
 
+	i = 0;
+	while(save[i] != '\0')
+	{
+		if (save[i] == '\n')
+		{
+			line[i] = save[i];
+			break;
+		}
+		line[i] = save[i];
+		i++;
+	}
+	if (flag == GNL_UNTIL_BREAK)
+	{
+		for_free = save;
+		save = malloc(after \n (excluding \n))
+		strcpy(save, for_free+index_of_after_\n_to_null)
+		free(for_free);
+	}
+	else if (flag == GNL_ALL)
+	{
+		free(save);
+		save = NULL;
+	}
 }
 
 char *get_next_line(int fd)
