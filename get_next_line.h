@@ -6,7 +6,7 @@
 /*   By: iyoshiha <iyoshiha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/20 17:46:07 by iyoshiha          #+#    #+#             */
-/*   Updated: 2021/12/04 20:01:41 by iyoshiha         ###   ########.fr       */
+/*   Updated: 2021/12/04 20:03:48 by iyoshiha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 #define GET_NEXT_LINE_H
 #include <string.h>
 #include <unistd.h>
+#include <stdlib.h>
 #include <stdio.h>
 /* #define BUF
 #ifdef BUF
