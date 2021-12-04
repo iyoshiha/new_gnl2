@@ -6,7 +6,7 @@
 /*   By: iyoshiha <iyoshiha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/20 17:46:32 by iyoshiha          #+#    #+#             */
-/*   Updated: 2021/12/03 03:41:08 by iyoshiha         ###   ########.fr       */
+/*   Updated: 2021/12/04 09:53:39 by iyoshiha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,103 +16,97 @@
 #define BUFFER_SIZE
 #endif
 
-typedef struct s_txt
-{
-	char	buf[BUFFER_SIZE + 1];
-	int		flag;
-	int		index_of_breakline;
-	char	*line;
-	ssize_t len_read;
-} t_txt;
+/* func stack
+strdup()
+strjoin()
+strcpy()
+*/
 
-int find_break_line(char *save, t_txt *txt);
-{
-	int	i;
 
-	i = 0;
-	if (save == NULL) // why this save is not recognized??? its nomal. like int i;
-		return (GNL_NOT_FOUND);
-	while (save[i] != '\0')
+
+int find_break_line(char **save, t_txt *txt);
+{
+	txt.save_len = 0;
+	txt->index_of_breakline == GNL_BREAK_NOT_FOUND;
+	if (*save == NULL)
+		return (GNL_BREAK_NOT_FOUND);
+	while (save[txt->save_len] != '\0')
 	{
-		if (save[i] == '\n')
-		{
-			t_txt->index_of_breakline = i;
-			return (GNL_FOUND);
-		i++;
+		if (save[txt->save_len] == '\n' && txt->index_of_brekaline == GNL_BREAK_NOT_FOUND)
+			t_txt->index_of_breakline = txt->save_len;
+		txt->save_len++;
 	}
-	return (GNL_NOT_FOUND);
+	return (t_txt->index_of_breakline);
 }
 
-void save_buf(char *save, t_txt *txt)
+void save_buf(char **save, char *buf)
 {
 	char	*for_free;
-	if (save == NULL)
+	if (save == NULL) // check if its first call of gnl (no malloc if its first coll)
 	{
 		// dup()
-		save = (char *)malloc(buf_len);
-		if (save == NULL)
+		*save = (char *)malloc(buf_len);
+		if (*save == NULL)
 			return (NULL);
-		strcpy(save, buf);
-		return ();
+		strcpy(*save, buf);
+		return ;
 		// this excution above is dup()
 	}
-	for_free = save;
-	save+buf; // join()
+	for_free = *save;
+	*save = ft_strjoin(*save, buf); // join()
 	free(for_free);
+	return;
 }
 
-void move_save_to_line(char *line, char *save, int flag)
+void move_save_to_line(t_txt *txt, char **save)
 {
 	int i;
-	char	*for_free;
+	char *old_save;
 
 	i = 0;
-	while(save[i] != '\0')
+	if (txt->index_of_breakline == GNL_BREAK_NOT_FOUND)
+		txt->line = (char *)malloc(txt->save_len + 1));
+	else
+		txt->line = (char *)malloc(txt->index_of_breakline + 1 + 1); // 1 for null, 1 for conv index to len;
+	while (*save[i] != '\0')
 	{
-		if (save[i] == '\n')
-		{
-			line[i] = save[i];
+		txt->line[i] = save[i];
+		if (*save[i] == '\n')
 			break;
-		}
-		line[i] = save[i];
 		i++;
 	}
-	if (flag == GNL_UNTIL_BREAK)
+	line[i] = '\0';
+	if ((txt->len_read == END_OF_FILE) && (txt->index_of_breakline == GNL_BREAK_NOT_FOUND)) // find_break_line's return value can be flag
 	{
-		for_free = save;
-		save = malloc(after \n (excluding \n))
-		strcpy(save, for_free+index_of_after_\n_to_null)
-		free(for_free);
+		free(*save);
+		*save = NULL;
+		return;
 	}
-	else if (flag == GNL_ALL)
-	{
-		free(save);
-		save = NULL;
-	}
+	old_save = *save;
+	*save = (char *)malloc((txt->save_len - txt->index_of_breakline));
+	strcpy(*save, old_save + (txt->index_of_breakline + 1));
+	free(old_save);
 }
 
 char *get_next_line(int fd)
 {
 	static char *save;
-	t_txt txt;
+	char		buf[BUFFER_SIZE + 1];
+	t_txt		txt;
 
-	txt.len_read = 0;
-	txt.flag = GNL_UNTIL_BREAK;
-	if (find_break_line(save) == GNL_NOT_FOUND)
+	if (find_break_line(save) == GNL_BREAK_NOT_FOUND) // 1
 		while (UNTIL_REACH_EOF_OR_FOUND_BREAK)
 		{
-			txt.len_read = read(fd, txt.buf, BUFFER_SIZE);
-			if (txt.len_read < 0 || txt.len_read && save == NULL)
+			txt.len_read = read(fd, buf, BUFFER_SIZE);
+			if (txt.len_read < 0 || ((txt.len_read == END_OF_FILE) && (save == NULL)))
 				return (NULL);
 			if (txt.len_read == END_OF_FILE)
 				break;
-			save_buf(save, &txt);
-			if (find_break_line(save) == GNL_FOUND)
+			buf[BUFFER_SIZE + 1] = '\0'
+			save_buf(&save, buf);
+			if (txt.index_of_breakline != GNL_BREAK_NOT_FOUND) // 2
 				break;
 		}
-	if (txt.len_read == END_OF_FILE)
-		if (find_break_line() == GNL_NOT_FOUND)
-			txt.flag = GNL_ALL;
-	move_save_to_line(&txt.line, save, txt.flag);
+	move_save_to_line(&txt, &save);
 	return (txt.line);
 }
