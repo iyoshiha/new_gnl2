@@ -6,7 +6,7 @@
 /*   By: iyoshiha <iyoshiha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/20 17:46:32 by iyoshiha          #+#    #+#             */
-/*   Updated: 2021/12/04 22:28:45 by iyoshiha         ###   ########.fr       */
+/*   Updated: 2021/12/04 22:32:19 by iyoshiha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ void save_buf(char **save, char *buf, int save_len)
 		return ;
 	}
 	for_free = *save;
-	*save = ft_strjoin(for_free, buf, length);
+	*save = ft_strjoin(for_free, buf);
 	free(for_free);
 	return;
 }

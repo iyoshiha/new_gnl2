@@ -8,6 +8,7 @@ int main(void)
 	fd = open("text.txt", O_RDONLY);
 	int i = 0;
 
+
 	str = get_next_line(fd);
 	while (str)
 	{
