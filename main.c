@@ -10,7 +10,7 @@ int main(void)
 
 
 	str = get_next_line(fd);
-	while (str)
+	while (str != NULL)
 	{
 		i++;
 		puts("**********");
