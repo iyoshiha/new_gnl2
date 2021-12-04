@@ -6,7 +6,7 @@
 /*   By: iyoshiha <iyoshiha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/20 17:46:32 by iyoshiha          #+#    #+#             */
-/*   Updated: 2021/12/04 22:07:39 by iyoshiha         ###   ########.fr       */
+/*   Updated: 2021/12/04 22:13:57 by iyoshiha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,7 +102,7 @@ char *get_next_line(int fd)
 			break;
 		buf[BUFFER_SIZE] = '\0';
 		save_buf(&save, buf, txt.save_len);
-		if (txt.index_of_breakline != GNL_BREAK_NOT_FOUND) // 2
+		if (find_break_line(save, &txt) != GNL_BREAK_NOT_FOUND) // 2
 			break;
 	}
 	move_save_to_line(&txt, &save);
