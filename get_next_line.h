@@ -6,7 +6,7 @@
 /*   By: iyoshiha <iyoshiha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/20 17:46:07 by iyoshiha          #+#    #+#             */
-/*   Updated: 2021/12/04 22:31:41 by iyoshiha         ###   ########.fr       */
+/*   Updated: 2021/12/04 23:36:57 by iyoshiha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,9 @@
 */
 #define END_OF_FILE 0
 #define NOT_END_OF_FILE 1
-#define NULL_LEN 1
+#define END_STR 1
+#define NEXT_INDEX_OF 1+
+#define OF_PREVIOUS -1
 
 #define GNL_BREAK_FOUND 1
 #define GNL_BREAK_NOT_FOUND -1
@@ -34,7 +36,7 @@
 
 typedef struct s_txt
 {
-	int		index_of_breakline;
+	int		index_of_break;
 	int		save_len;
 	char	*line;
 	ssize_t len_read;
