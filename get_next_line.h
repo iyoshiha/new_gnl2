@@ -6,16 +6,20 @@
 /*   By: iyoshiha <iyoshiha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/20 17:46:07 by iyoshiha          #+#    #+#             */
-/*   Updated: 2021/12/04 08:08:01 by iyoshiha         ###   ########.fr       */
+/*   Updated: 2021/12/04 20:01:41 by iyoshiha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef GET_NEXT_LINE_H
 #define GET_NEXT_LINE_H
-#define BUF
+#include <string.h>
+#include <unistd.h>
+#include <stdio.h>
+/* #define BUF
 #ifdef BUF
 #define BUFFER_SIZE 5
 #endif
+*/
 #define END_OF_FILE 0
 #define NOT_END_OF_FILE 1
 #define NULL_LEN 1
@@ -36,7 +40,9 @@ typedef struct s_txt
 } t_txt;
 
 #endif
-
-int find_break_line(char *save);
-void save_buf(char *save, char *buf);
+size_t	ft_strlen(const char *s);
+size_t	ft_strlcat(char *dst, const char *src, size_t dstsize);
+int find_break_line(char *save, t_txt *txt);
+void save_buf(char **save, char *buf, int save_len);
 void move_save_to_line(t_txt *txt, char **save);//
+char	*get_next_line(int	fd);

@@ -6,25 +6,21 @@
 /*   By: iyoshiha <iyoshiha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/20 17:46:32 by iyoshiha          #+#    #+#             */
-/*   Updated: 2021/12/04 09:53:39 by iyoshiha         ###   ########.fr       */
+/*   Updated: 2021/12/04 20:01:01 by iyoshiha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <unistd.h>
 #include "get_next_line.h"
 #ifndef BUFFER_SIZE // delete here when submit
-#define BUFFER_SIZE
+#define BUFFER_SIZE 5
 #endif
 
 /* func stack
-strdup()
-strjoin()
-strcpy()
+strcat();
+strlen();
 */
 
-
-
-int find_break_line(char **save, t_txt *txt);
+int find_break_line(char *save, t_txt *txt);
 {
 	txt.save_len = 0;
 	txt->index_of_breakline == GNL_BREAK_NOT_FOUND;
@@ -39,21 +35,23 @@ int find_break_line(char **save, t_txt *txt);
 	return (t_txt->index_of_breakline);
 }
 
-void save_buf(char **save, char *buf)
+void save_buf(char **save, char *buf, int save_len)
 {
+	int		length;
 	char	*for_free;
-	if (save == NULL) // check if its first call of gnl (no malloc if its first coll)
+
+	length = save_len + BUFFER_SIZE + 1;
+	if (*save == NULL) // check if its first call of gnl (no malloc if its first coll) //NULL pointer , NULL string is different
 	{
-		// dup()
-		*save = (char *)malloc(buf_len);
+		*save = (char *)malloc(length);
 		if (*save == NULL)
 			return (NULL);
-		strcpy(*save, buf);
+		ft_strlcat(*save, buf, length);
 		return ;
-		// this excution above is dup()
 	}
 	for_free = *save;
-	*save = ft_strjoin(*save, buf); // join()
+	*save = (char *)malloc(length);
+	ft_strlcat(*save, buf, length);
 	free(for_free);
 	return;
 }
@@ -71,12 +69,12 @@ void move_save_to_line(t_txt *txt, char **save)
 	while (*save[i] != '\0')
 	{
 		txt->line[i] = save[i];
-		if (*save[i] == '\n')
-			break;
 		i++;
+		if (*save[i - 1] == '\n') // after put \n in line then move but we didnt exam so -1
+			break;
 	}
 	line[i] = '\0';
-	if ((txt->len_read == END_OF_FILE) && (txt->index_of_breakline == GNL_BREAK_NOT_FOUND)) // find_break_line's return value can be flag
+	if ((txt->len_read == END_OF_FILE) && (txt->index_of_breakline == GNL_BREAK_NOT_FOUND)) //last line // find_break_line's return value can be flag
 	{
 		free(*save);
 		*save = NULL;
@@ -84,7 +82,7 @@ void move_save_to_line(t_txt *txt, char **save)
 	}
 	old_save = *save;
 	*save = (char *)malloc((txt->save_len - txt->index_of_breakline));
-	strcpy(*save, old_save + (txt->index_of_breakline + 1));
+	ft_strlcat(*save, old_save + (txt->index_of_breakline + 1), (txt->save_len - txt->index_of_breakline));
 	free(old_save);
 }
 
@@ -94,7 +92,7 @@ char *get_next_line(int fd)
 	char		buf[BUFFER_SIZE + 1];
 	t_txt		txt;
 
-	if (find_break_line(save) == GNL_BREAK_NOT_FOUND) // 1
+	if (find_break_line(save, &txt) == GNL_BREAK_NOT_FOUND) // 1
 		while (UNTIL_REACH_EOF_OR_FOUND_BREAK)
 		{
 			txt.len_read = read(fd, buf, BUFFER_SIZE);
@@ -102,8 +100,8 @@ char *get_next_line(int fd)
 				return (NULL);
 			if (txt.len_read == END_OF_FILE)
 				break;
-			buf[BUFFER_SIZE + 1] = '\0'
-			save_buf(&save, buf);
+			buf[BUFFER_SIZE + 1] = '\0';
+			save_buf(&save, buf, txt.save_len);
 			if (txt.index_of_breakline != GNL_BREAK_NOT_FOUND) // 2
 				break;
 		}
