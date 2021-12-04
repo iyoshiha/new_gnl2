@@ -6,7 +6,7 @@
 /*   By: iyoshiha <iyoshiha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/20 17:46:32 by iyoshiha          #+#    #+#             */
-/*   Updated: 2021/12/04 23:46:54 by iyoshiha         ###   ########.fr       */
+/*   Updated: 2021/12/04 23:52:24 by iyoshiha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,7 +83,7 @@ void move_save_to_line(t_txt *txt, char **save)
 	}
 	old_save = *save;
 	*save = (char *)malloc((len_after_breakline));
-	ft_strlcat(*save, old_save + (NEXT_INDEX_OF txt->index_of_break), (len_after_breakline));
+	ft_strlcat(*save, (old_save + NEXT_INDEX_OF txt->index_of_break), len_after_breakline);
 	free(old_save);
 }
 
