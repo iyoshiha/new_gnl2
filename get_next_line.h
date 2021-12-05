@@ -6,7 +6,7 @@
 /*   By: iyoshiha <iyoshiha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/20 17:46:07 by iyoshiha          #+#    #+#             */
-/*   Updated: 2021/12/06 05:58:06 by iyoshiha         ###   ########.fr       */
+/*   Updated: 2021/12/06 06:11:25 by iyoshiha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@
 #define END_STR 1
 #define NEXT_INDEX_OF 1+
 #define OF_PREVIOUS -1
-#define CONVERT_TO_LEN +1
+#define CONVERT_TO_LEN 1+
 #define GNL_BREAK_FOUND 1
 #define GNL_NEWLINE_NOT_FOUND -1
 #define UNTIL_REACH_EOF_OR_FOUND_NEWLINE 1
@@ -41,7 +41,7 @@ size_t	ft_strlen(const char *s);
 size_t	ft_strlcat(char *dst, const char *src, size_t dstsize);
 int		find_newline(char *save, t_txt *txt);
 void	save_buf(char **save, char *buf, t_txt *txt);
-void	creat_oneline(t_txt *txt, char **save);
+void	*creat_oneline(t_txt *txt, char **save);
 char	*get_next_line(int	fd);
 
 #endif

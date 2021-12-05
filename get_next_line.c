@@ -6,7 +6,7 @@
 /*   By: iyoshiha <iyoshiha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/20 17:46:32 by iyoshiha          #+#    #+#             */
-/*   Updated: 2021/12/06 05:57:02 by iyoshiha         ###   ########.fr       */
+/*   Updated: 2021/12/06 06:13:32 by iyoshiha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,11 +23,17 @@ int find_newline(char *save, t_txt *txt)
 		return (GNL_NEWLINE_NOT_FOUND);
 	while (save[txt->save_len] != '\0')
 	{
-		if (save[txt->save_len] == '\n' && txt->newline_index == GNL_NEWLINE_NOT_FOUND) //
+		if ((save[txt->save_len] == '\n') && (txt->newline_index == GNL_NEWLINE_NOT_FOUND)) //
 			txt->newline_index = txt->save_len;
 		txt->save_len++;
 	}
 	return (txt->newline_index);
+}
+void	*save_free(char **save)
+{
+		free(*save);
+		*save = NULL;
+		return(NULL);
 }
 
 void save_buf(char **save, char *buf, t_txt *txt)
@@ -35,6 +41,7 @@ void save_buf(char **save, char *buf, t_txt *txt)
 	int		length;
 	char	*for_free;
 
+	buf[txt->len_read] = '\0';
 	length = txt->save_len + txt->len_read + END_STR; // a little biger buffer size. should be diffetet
 	if (*save == NULL) // check if its first call of gnl (no malloc if its first coll) //NULL pointer , NULL string is different
 	{
@@ -50,12 +57,7 @@ void save_buf(char **save, char *buf, t_txt *txt)
 	return;
 }
 
-void	*save_free(char **save)
-{
-		free(*save);
-		*save = NULL;
-		return(NULL);
-}
+
 
 void	*creat_oneline(t_txt *txt, char **save)
 {
@@ -68,7 +70,7 @@ void	*creat_oneline(t_txt *txt, char **save)
 	if (txt->newline_index == GNL_NEWLINE_NOT_FOUND)
 		txt->line = (char *)malloc(txt->save_len + END_STR);
 	else
-		txt->line = (char *)malloc(txt->newline_index CONVERT_TO_LEN + END_STR); // 1 for null, 1 for conv index to len;
+		txt->line = (char *)malloc(CONVERT_TO_LEN txt->newline_index + END_STR); // 1 for null, 1 for conv index to len;
 	while ((*save)[i] != '\0')
 	{
 		txt->line[i] = (*save)[i];
@@ -84,6 +86,7 @@ void	*creat_oneline(t_txt *txt, char **save)
 	**save = '\0';
 	ft_strlcat(*save, (old_save + NEXT_INDEX_OF txt->newline_index), len_after_newline);
 	free(old_save);
+	return (NULL);
 }
 
 
@@ -93,8 +96,6 @@ char *get_next_line(int fd)
 	char		buf[BUFFER_SIZE + END_STR];
 	t_txt		txt;
 
-	*buf = '\0';
-	find_newline(save, &txt);
 	while (UNTIL_REACH_EOF_OR_FOUND_NEWLINE)
 	{
 		txt.len_read = read(fd, buf, BUFFER_SIZE);
@@ -102,7 +103,6 @@ char *get_next_line(int fd)
 			return (NULL);
 		if (txt.len_read == END_OF_FILE)
 			break;
-		buf[txt.len_read] = '\0';
 		save_buf(&save, buf, &txt);
 		if (find_newline(save, &txt) != GNL_NEWLINE_NOT_FOUND) // 2
 			break;
