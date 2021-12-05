@@ -6,7 +6,7 @@
 /*   By: iyoshiha <iyoshiha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/20 17:46:32 by iyoshiha          #+#    #+#             */
-/*   Updated: 2021/12/06 07:17:33 by iyoshiha         ###   ########.fr       */
+/*   Updated: 2021/12/06 07:23:47 by iyoshiha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,8 +42,8 @@ void save_buf(char **save, char *buf, t_txt *txt)
 	char	*for_free;
 
 	buf[txt->len_read] = '\0';
-	length = txt->save_len + txt->len_read + END_STR; // save len can be gabage val; but when *save is NULL, save_len will be set.
-	if (*save == NULL) // check if its first call of gnl (no malloc if its first coll) //NULL pointer , NULL string is different
+	length = txt->save_len + txt->len_read + END_STR;
+	if (*save == NULL)
 	{
 		*save = (char *)malloc(length);
 		if (*save == NULL)
@@ -52,7 +52,7 @@ void save_buf(char **save, char *buf, t_txt *txt)
 		return ;
 	}
 	for_free = *save;
-	*save = ft_strjoin(for_free, buf);
+	*save = ft_strjoin(for_free, buf); // is strjoin proper ?
 	free(for_free);
 	return;
 }
@@ -82,7 +82,7 @@ void	*creat_oneline(t_txt *txt, char **save)
 	old_save = *save;
 	*save = (char *)malloc((len_after_newline));
 	**save = '\0';
-	ft_strlcat(*save, (old_save + NEXT_INDEX_OF txt->newline_index), len_after_newline);
+	ft_strlcat(*save, (old_save + NEXT_INDEX_OF txt->newline_index), len_after_newline); // is lcat here proper?
 	free(old_save);
 	return (NULL);
 }
