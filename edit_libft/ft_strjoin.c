@@ -6,35 +6,35 @@
 /*   By: iyoshiha <iyoshiha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/30 00:27:42 by iyoshiha          #+#    #+#             */
-/*   Updated: 2021/12/06 03:11:29 by iyoshiha         ###   ########.fr       */
+/*   Updated: 2021/12/06 07:27:15 by iyoshiha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-char	*ft_strjoin(char const *save, char const *old)
+char	*ft_strjoin(char const *prefix, char const *sufix)
 {
 	char	*joined_str;
 	size_t	i;
-	size_t	len_s1;
-	size_t	len_s2;
+	size_t	len_pre;
+	size_t	len_su;
 
-	if (save == NULL || old == NULL)
+	if (prefix == NULL || sufix == NULL)
 		return (NULL);
 	i = 0;
-	len_s1 = ft_strlen(save);
-	len_s2 = ft_strlen(old);
-	joined_str = (char *)malloc(sizeof(char) * (len_s1 + len_s2 + 1));
+	len_pre = ft_strlen(prefix);
+	len_su = ft_strlen(sufix);
+	joined_str = (char *)malloc(sizeof(char) * (len_pre + len_su + 1));
 	if (!(joined_str))
 		return (NULL);
-	while (i < len_s1)
+	while (i < len_pre)
 	{
-		joined_str[i] = save[i];
+		joined_str[i] = prefix[i];
 		i++;
 	}
-	while (i < len_s2 + len_s1)
+	while (i < len_su + len_pre)
 	{
-		joined_str[i] = old[i - len_s1];
+		joined_str[i] = sufix[i - len_pre];
 		i++;
 	}
 	joined_str[i] = '\0';
