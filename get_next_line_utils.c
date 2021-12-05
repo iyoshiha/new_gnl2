@@ -6,7 +6,7 @@
 /*   By: iyoshiha <iyoshiha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/20 17:46:16 by iyoshiha          #+#    #+#             */
-/*   Updated: 2021/12/06 07:33:20 by iyoshiha         ###   ########.fr       */
+/*   Updated: 2021/12/06 08:05:49 by iyoshiha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,55 +24,38 @@ size_t	ft_strlen(const char *s)
 	return (i);
 }
 
-size_t	ft_strlcat(char *dst, const char *src, size_t dstsize)
-{
-	size_t	dl;
-	size_t	sl;
-	size_t	i;
-
-	i = 0;
-	dl = ft_strlen(dst);
-	sl = ft_strlen(src);
-	if (dstsize == 0)
-		return (sl + dstsize);
-	while (src[i] != '\0' && (dl + i) < dstsize - 1)
-	{
-		dst[dl + i] = src[i];
-		i++;
-	}
-	if (src[i] == '\0' || (dl + i) == dstsize - 1)
-		dst[dl + i] = '\0';
-	if (dl >= dstsize)
-		return (sl + dstsize);
-	else
-		return (dl + sl);
-}
-
-char	*ft_strjoin(char const *s1, char const *s2)
+char	*ft_strjoin(char const *head, char const *tail)
 {
 	char	*joined_str;
 	size_t	i;
-	size_t	len_s1;
-	size_t	len_s2;
+	size_t	len_head;
+	size_t	len_tail;
 
-	if (s1 == NULL || s2 == NULL)
+	if (tail == NULL)
 		return (NULL);
 	i = 0;
-	len_s1 = ft_strlen(s1);
-	len_s2 = ft_strlen(s2);
-	joined_str = (char *)malloc(sizeof(char) * (len_s1 + len_s2 + 1));
+	len_head = ft_strlen(head);
+	len_tail = ft_strlen(tail);
+	joined_str = (char *)malloc(sizeof(char) * (len_head + len_tail + END_STR));
 	if (!(joined_str))
 		return (NULL);
-	while (i < len_s1)
+	while (i < len_head)
 	{
-		joined_str[i] = s1[i];
+		joined_str[i] = head[i];
 		i++;
 	}
-	while (i < len_s2 + len_s1)
+	while (i < len_tail + len_head)
 	{
-		joined_str[i] = s2[i - len_s1];
+		joined_str[i] = tail[i - len_head];
 		i++;
 	}
 	joined_str[i] = '\0';
 	return (joined_str);
+}
+
+void	*save_free(char **save)
+{
+		free(*save);
+		*save = NULL;
+		return(NULL);
 }

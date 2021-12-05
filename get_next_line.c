@@ -6,7 +6,7 @@
 /*   By: iyoshiha <iyoshiha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/20 17:46:32 by iyoshiha          #+#    #+#             */
-/*   Updated: 2021/12/06 07:52:07 by iyoshiha         ###   ########.fr       */
+/*   Updated: 2021/12/06 08:13:11 by iyoshiha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,12 +29,6 @@ int find_newline(char *save, t_txt *txt)
 	}
 	return (txt->newline_index);
 }
-void	*save_free(char **save)
-{
-		free(*save);
-		*save = NULL;
-		return(NULL);
-}
 
 void save_buf(char **save, char *buf, t_txt *txt)
 {
@@ -45,12 +39,6 @@ void save_buf(char **save, char *buf, t_txt *txt)
 	length = txt->save_len + txt->len_read + END_STR;
 	if (*save == NULL)
 	{
-		/*
-		*save = (char *)malloc(length);
-		if (*save == NULL)
-			return ;
-		ft_strlcat(*save, buf, length); // MUST change concatenating uninitialized malloced str ###
-		*/
 		*save = ft_strjoin(NULL, buf);
 		return ;
 	}
@@ -63,11 +51,9 @@ void save_buf(char **save, char *buf, t_txt *txt)
 void	*creat_oneline(t_txt *txt, char **save)
 {
 	int i;
-	int len_after_newline;
 	char *old_save;
 
 	i = 0;
-	len_after_newline = txt->save_len - txt->newline_index;
 	if (txt->newline_index == GNL_NEWLINE_NOT_FOUND)
 		txt->line = (char *)malloc(txt->save_len + END_STR);
 	else

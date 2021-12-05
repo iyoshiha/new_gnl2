@@ -6,7 +6,7 @@
 /*   By: iyoshiha <iyoshiha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/20 17:46:07 by iyoshiha          #+#    #+#             */
-/*   Updated: 2021/12/06 06:47:41 by iyoshiha         ###   ########.fr       */
+/*   Updated: 2021/12/06 08:10:07 by iyoshiha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,9 +38,9 @@ typedef struct	s_txt
 
 char	*ft_strjoin(char const *s1, char const *s2);
 size_t	ft_strlen(const char *s);
-size_t	ft_strlcat(char *dst, const char *src, size_t dstsize);
 int		find_newline(char *save, t_txt *txt);
 void	save_buf(char **save, char *buf, t_txt *txt);
+void	*save_free(char **save);
 void	*creat_oneline(t_txt *txt, char **save);
 char	*get_next_line(int	fd);
 
