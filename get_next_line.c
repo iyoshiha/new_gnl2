@@ -6,7 +6,7 @@
 /*   By: iyoshiha <iyoshiha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/20 17:46:32 by iyoshiha          #+#    #+#             */
-/*   Updated: 2021/12/06 06:13:32 by iyoshiha         ###   ########.fr       */
+/*   Updated: 2021/12/06 07:17:33 by iyoshiha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ void save_buf(char **save, char *buf, t_txt *txt)
 	char	*for_free;
 
 	buf[txt->len_read] = '\0';
-	length = txt->save_len + txt->len_read + END_STR; // a little biger buffer size. should be diffetet
+	length = txt->save_len + txt->len_read + END_STR; // save len can be gabage val; but when *save is NULL, save_len will be set.
 	if (*save == NULL) // check if its first call of gnl (no malloc if its first coll) //NULL pointer , NULL string is different
 	{
 		*save = (char *)malloc(length);
@@ -56,8 +56,6 @@ void save_buf(char **save, char *buf, t_txt *txt)
 	free(for_free);
 	return;
 }
-
-
 
 void	*creat_oneline(t_txt *txt, char **save)
 {
@@ -96,7 +94,8 @@ char *get_next_line(int fd)
 	char		buf[BUFFER_SIZE + END_STR];
 	t_txt		txt;
 
-	while (UNTIL_REACH_EOF_OR_FOUND_NEWLINE)
+	find_newline(save, &txt);
+	while (UNTIL_REACH_EOF_OR_FIND_NEWLINE)
 	{
 		txt.len_read = read(fd, buf, BUFFER_SIZE);
 		if (txt.len_read < 0 || ((txt.len_read == END_OF_FILE) && (save == NULL)))
@@ -104,7 +103,7 @@ char *get_next_line(int fd)
 		if (txt.len_read == END_OF_FILE)
 			break;
 		save_buf(&save, buf, &txt);
-		if (find_newline(save, &txt) != GNL_NEWLINE_NOT_FOUND) // 2
+		if (find_newline(save, &txt) != GNL_NEWLINE_NOT_FOUND)
 			break;
 	}
 	if ((txt.len_read == END_OF_FILE) && *save == '\0')

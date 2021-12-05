@@ -6,7 +6,7 @@
 /*   By: iyoshiha <iyoshiha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/20 17:46:07 by iyoshiha          #+#    #+#             */
-/*   Updated: 2021/12/06 06:11:25 by iyoshiha         ###   ########.fr       */
+/*   Updated: 2021/12/06 06:47:41 by iyoshiha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@
 #define CONVERT_TO_LEN 1+
 #define GNL_BREAK_FOUND 1
 #define GNL_NEWLINE_NOT_FOUND -1
-#define UNTIL_REACH_EOF_OR_FOUND_NEWLINE 1
+#define UNTIL_REACH_EOF_OR_FIND_NEWLINE 1
 // ssize_t range is [-1 =< ssize_t =<  SSIZE_MAX]
 
 typedef struct	s_txt
