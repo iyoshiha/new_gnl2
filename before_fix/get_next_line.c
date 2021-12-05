@@ -6,7 +6,7 @@
 /*   By: iyoshiha <iyoshiha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/20 17:46:32 by iyoshiha          #+#    #+#             */
-/*   Updated: 2021/12/06 01:31:46 by iyoshiha         ###   ########.fr       */
+/*   Updated: 2021/12/06 01:31:53 by iyoshiha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,17 +70,16 @@ void creat_oneline(t_txt *txt, char **save)
 			break;
 	}
 	txt->line[i] = '\0';
+	if ((txt->len_read == END_OF_FILE) && (txt->index_of_break == GNL_BREAK_NOT_FOUND)) //last line // find_break_line's return value can be flag
+	{
+		free(*save);
+		*save = NULL;
+		return;
+	}
 	old_save = *save;
 	*save = (char *)malloc((len_after_breakline));
 	ft_strlcat(*save, (old_save + NEXT_INDEX_OF txt->index_of_break), len_after_breakline);
 	free(old_save);
-}
-
-char	*save_free(char **save)
-{
-		free(*save);
-		*save = NULL;
-		return(NULL);
 }
 
 char *get_next_line(int fd)
@@ -89,21 +88,22 @@ char *get_next_line(int fd)
 	char		buf[BUFFER_SIZE + END_STR];
 	t_txt		txt;
 
-	find_break_line(save, &txt);
-	while (UNTIL_REACH_EOF_OR_FOUND_BREAK)
+	find_break_line(save, &txt); // 1
+	while (UNTIL_REACH_EOF_OR_FOUND_BREAK) // 1
 	{
 		txt.len_read = read(fd, buf, BUFFER_SIZE);
+		// printf("\\n : %d\nlen_red : %zd\nsave_len : %d\n\n", txt.index_of_break, txt.len_read, txt.save_len); // dele
 		if (txt.len_read < 0 || ((txt.len_read == END_OF_FILE) && (save == NULL)))
 			return (NULL);
 		if (txt.len_read == END_OF_FILE)
 			break;
-		buf[txt.len_read] = '\0';
+		buf[txt.len_read] = '\0'; 	// this sould be txt.len_read
 		save_buf(&save, buf, txt.save_len);
 		if (find_break_line(save, &txt) != GNL_BREAK_NOT_FOUND) // 2
 			break;
 	}
-	if ((txt.len_read == END_OF_FILE) && *save == '\0')
-		return(save_free(&save));
-	creat_oneline(&txt, &save);
+	//if ((txt.len_read == END_OF_FILE) && *save == '\0')
+		// return(NULL); // this should free save;
+	creat_oneline(&txt, &save); // split this func ;
 	return (txt.line);
 }
