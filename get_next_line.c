@@ -6,7 +6,7 @@
 /*   By: iyoshiha <iyoshiha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/20 17:46:32 by iyoshiha          #+#    #+#             */
-/*   Updated: 2021/12/06 08:13:11 by iyoshiha         ###   ########.fr       */
+/*   Updated: 2021/12/07 03:18:26 by iyoshiha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,10 +40,13 @@ void save_buf(char **save, char *buf, t_txt *txt)
 	if (*save == NULL)
 	{
 		*save = ft_strjoin(NULL, buf);
-		return ;
+		return ;/*
+		 exam if null is good.
+		 // save has null pointer so strjoin need to handle NULL; but if there is no norm num of funcs restriction we should use strdup();
+		 */
 	}
 	for_free = *save;
-	*save = ft_strjoin(for_free, buf); // is strjoin proper ?
+	*save = ft_strjoin(for_free, buf); // this is perfectly proper!
 	free(for_free);
 	return;
 }
@@ -69,11 +72,10 @@ void	*creat_oneline(t_txt *txt, char **save)
 	if ((txt->len_read == END_OF_FILE) && (txt->newline_index == GNL_NEWLINE_NOT_FOUND)) //last line // find_break_line's return value can be flag
 		return (save_free(save));
 	old_save = *save;
-	*save = ft_strjoin(NULL, (old_save + NEXT_INDEX_OF txt->newline_index)); // is lcat here proper?
+	*save = ft_strjoin(NULL, (old_save + NEXT_INDEX_OF txt->newline_index)); // should be strdup();
 	free(old_save);
 	return (NULL);
 }
-
 
 char *get_next_line(int fd)
 {

@@ -6,7 +6,7 @@
 /*   By: iyoshiha <iyoshiha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/20 17:46:07 by iyoshiha          #+#    #+#             */
-/*   Updated: 2021/12/06 08:10:07 by iyoshiha         ###   ########.fr       */
+/*   Updated: 2021/12/07 03:18:52 by iyoshiha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,14 +16,11 @@
 #include <unistd.h>
 #include <stdlib.h>
 #include <stdio.h>
-#
 #define END_OF_FILE 0
-#define NOT_END_OF_FILE 1
 #define END_STR 1
 #define NEXT_INDEX_OF 1+
 #define OF_PREVIOUS -1
 #define CONVERT_TO_LEN 1+
-#define GNL_BREAK_FOUND 1
 #define GNL_NEWLINE_NOT_FOUND -1
 #define UNTIL_REACH_EOF_OR_FIND_NEWLINE 1
 // ssize_t range is [-1 =< ssize_t =<  SSIZE_MAX]
