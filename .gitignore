@@ -1,6 +1,0 @@
-*.dSYM
-Info.plist
-main
-mem_check.h
-mem_check.c
-macro_template.h
