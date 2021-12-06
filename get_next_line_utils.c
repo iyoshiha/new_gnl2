@@ -6,7 +6,7 @@
 /*   By: iyoshiha <iyoshiha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/20 17:46:16 by iyoshiha          #+#    #+#             */
-/*   Updated: 2021/12/06 08:05:49 by iyoshiha         ###   ########.fr       */
+/*   Updated: 2021/12/07 04:41:29 by iyoshiha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ char	*ft_strjoin(char const *head, char const *tail)
 
 void	*save_free(char **save)
 {
-		free(*save);
-		*save = NULL;
-		return(NULL);
+	free(*save);
+	*save = NULL;
+	return (NULL);
 }
