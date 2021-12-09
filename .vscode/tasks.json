@@ -8,15 +8,19 @@
             "label": "c_build",
             "command": "gcc",
             "args": [
-				// "-Wall",
-				//"-Wextra",
-				//"-Werror",
+				"-Wall",
+				"-Wextra",
+				"-Werror",
 				"${fileDirname}/main.c",
-				"${fileDirname}/get_next_line.c",
+				"${fileDirname}/get_next_line_original.c",
+				// "${fileDirname}/get_next_line_submitted.c",
 				"${fileDirname}/get_next_line_utils.c",
 				"-o",
 				"${fileDirname}/main",
 				"-g",
+				"-D",
+				"BUFFER_SIZE=1324576543345672"
+
 				/*
                 "-g",
                 "${fileDirname}/main.c",

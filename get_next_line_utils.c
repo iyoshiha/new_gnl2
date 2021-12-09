@@ -6,7 +6,7 @@
 /*   By: iyoshiha <iyoshiha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/20 17:46:16 by iyoshiha          #+#    #+#             */
-/*   Updated: 2021/12/07 04:41:29 by iyoshiha         ###   ########.fr       */
+/*   Updated: 2021/12/10 02:25:11 by iyoshiha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ char	*ft_strjoin(char const *head, char const *tail)
 	size_t	len_head;
 	size_t	len_tail;
 
-	if (tail == NULL)
+	if (head == NULL && tail == NULL)
 		return (NULL);
 	i = 0;
 	len_head = ft_strlen(head);
@@ -53,9 +53,18 @@ char	*ft_strjoin(char const *head, char const *tail)
 	return (joined_str);
 }
 
-void	*save_free(char **save)
+void	*save_free(char **save, t_place_save place)
 {
-	free(*save);
-	*save = NULL;
-	return (NULL);
+	if (place == in_create_newline)
+	{
+		free(*save);
+		*save = FINISH;
+		return (MEMORY_SUCCESS);
+	}
+	else if (place == in_gnl)
+	{
+		free(*save);
+		*save = FINISH;
+	}
+	return (*save);
 }
